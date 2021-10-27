@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="outer">
+        <div class="middle">
+            <button>Click Me</button>
+        </div>
+    </div>
+    <script>
+        const outer =document.querySelector('.outer');
+        const middle = document.querySelector('.middle');
+        const button = document.querySelector('button');
+
+        outer.addEventListener('click', event=>{
+            console.log(`outer: ${event.currentTarget},${event.target}`)
+        });
+        middle.addEventListener('click', event=>{
+            console.log(`middle: ${event.currentTarget},${event.target}`)
+        });
+        button.addEventListener('click', event=>{
+            console.log(`button1: ${event.currentTarget},${event.target}`)
+            // browser-event.stopPropagation(); //위로 버블링 안되게 해줌.
+            event.stopImmediatePropagation(); //다른 이벤트 다 취소해라
+        });
+        button.addEventListener('click', event=>{
+            console.log(`button2: ${event.currentTarget},${event.target}`)
+            // browser-event.stopImmediatePropagation(); //다른 이벤트 다 취소해라 그래도 버튼1이 우선이라 1은 나옴.
+            //이런거쓰면 안됨. 지 혼자만 쓰면 안됨.
+        });
+    </script>
+</body>
+</html>

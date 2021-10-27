@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    div{
+        width: 250px;
+        height: 250px;
+        background-color: #9c69d9;
+        margin-bottom: 5px;
+    }
+</style>
+<body>
+<div>
+    <input type="checkbox">
+</div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<script>
+    document.addEventListener('wheel',event=>{ //wheel에는 preventDefault를 호출하지않는게 좋다. passive가ture여서
+        console.log('scrolling');
+      event.preventDefault();  //오류남.
+    },{passive:false});
+
+    const checkbox=document.querySelector('input');
+    checkbox.addEventListener('click',event=>{
+        console.log('checked');
+        event.preventDefault(); //체크버튼 눌러도 체크됬다고 안뜸. 행동취소
+    });
+</script>
+</body>
+</html>
+<!--
+passive에 해당되는 리스너는 브라우저가 리스너에게 이벤트가 일어났다는 것만 노티스하고 자기할일(예를 들어 스크롤링같은)을 함
+
+active에 해당되는 리스너는 브라우저가 리스너가 할 일을 할 때까지 기다려주고 실행(예를 들어 체크박스에 체크표시하기)을 함
+
+
+
+* passive에는 preventDefault()를 쓰지 않는 것을 권장
+
+* active에는 괜찮음
+
+
+
+* 굳이 굳이 passive에 prevenDefault()를 써야겠다면 option 중 passive: false를 추가한 뒤 사용 가능
+
+
+-->
